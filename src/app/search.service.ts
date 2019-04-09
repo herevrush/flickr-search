@@ -42,33 +42,17 @@ export class SearchService {
   }
 
   searchFlikr(searchTerm: string) {
-    // const headers = new HttpHeaders().set('Access-Control-Allow-Origin', '*');;
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type':  'application/json',
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Access-Control-Allow-Methods':'GET, POST, DELETE, PUT',
-    //   }),
-    //   responseType: 'json'
-    // };
-    // headers.append('Access-Control-Allow-Origin', '*');
-    // headers.append('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
-    // headers.append('Access-Control-Allow-Headers', 'content-type, accept');
-    // // headers.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
-    //   , {
-    //   headers : {
-    //     'Access-Control-Allow-Origin': '*' ,
-    //     'Access-Control-Allow-Methods': 'GET, POST, PUT,OPTIONS',
-    //   },
-    //   responseType: 'text'
-    // }
     return this.http.jsonp(this.searchUrl(searchTerm), 'jsoncallback').pipe(
-      catchError(this.handleError),
+      catchError( err => {
+        this.handleError(err);
+        return throwError(err) ;
+      }),
       map(res  => {
-        return res.items;
+        if ('items' in res) {
+          return res['items'];
+        }
+
       })
     );
   }
-
-
 }

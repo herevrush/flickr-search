@@ -20,16 +20,13 @@ export class AppComponent {
     this.searchService.search(this.searchTerm).subscribe(
       results => {
           this.searchResults = results;
-          console.log(this.searchResults);
       }
     );
   }
 
   searchFlikr(event) {
     const value = event.target.value;
-    console.log(value);
-    console.log(this.searchTerm);
-    if (value.length > 0) {
+    if (value.trim().length > 0) {
       this.searchTerm.next(value);
     } else {
       this.searchResults.length = 0;
