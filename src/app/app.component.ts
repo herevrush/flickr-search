@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {SearchService} from './search.service';
-import { Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-root',

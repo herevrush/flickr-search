@@ -7,9 +7,10 @@ import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from 'rx
 @Injectable()
 export class SearchService {
 
-  flickrSearchUrl =  'https://api.flickr.com/services/feeds/photos_public.gne' ;
+  flickrSearchUrl = 'https://api.flickr.com/services/feeds/photos_public.gne';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   search(searchTerm: Observable<string>) {
     try {
@@ -47,10 +48,10 @@ export class SearchService {
 
   searchFlikr(searchTerm: string) {
     return this.http.jsonp(this.searchUrl(searchTerm), 'jsoncallback').pipe(
-      catchError( err => {
+      catchError(err => {
         return this.handleError(err);
       }),
-      map(res  => {
+      map(res => {
         if ('items' in res) {
           return res['items'];
         }
