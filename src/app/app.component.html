@@ -1,0 +1,41 @@
+
+
+ <!-- container centers content on large screens -->
+  <section id="search" class="section-content text-center">
+    <div class="container align-items-center align-content-center">
+
+      <div class="col-md-12 content ">
+          <form class="form-group my-2 my-lg-0">
+            <input class="form-control mr-sm-2" #searchInput name="searchInput" type="search"
+                   placeholder="Search Flickr by tags or Author. "
+                   (keyup)="searchFlikr($event)">
+          </form>
+      </div>
+    </div>
+  </section>
+ <section id="search-results">
+<!--   <div class="text-center">-->
+<!--     <p class="lead">{{searchResults}}</p>-->
+<!--   </div>-->
+   <div class="row text-center d-flex justify-content-around"  >
+     <div class="col-md-3 col-xs-6"
+          *ngFor="let searchResult of searchResults ">
+       <div class="card mb-3 shadow-sm result-content">
+         <a href="{{searchResult.link}}" class="mx-auto d-block " target="_blank">
+           <img src="{{searchResult.media.m}}" class="flickr-thumbnail img-thumbnail img-fluid card-img-top">
+         </a>
+         <div class="card-body">
+           <p class="card-text search-text text-left text-warning">
+             <span class="badge badge-warning">Author</span>
+             {{searchResult.author}}</p>
+           <p class="tags rounded text-left text-info">
+             <span class="badge badge-info">Tags</span>
+             {{searchResult.tags}}</p>
+         </div>
+       </div>
+
+     </div>
+     <div *ngIf="(searchResults)?.length === 0 && !!searchInput.value" >No Results Found</div>
+   </div>
+ </section>
+<footer></footer>

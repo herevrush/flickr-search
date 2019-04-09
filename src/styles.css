@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap/dist/css/bootstrap-grid.css";
+
+body {
+  background: #dedede;
+}
+
+.navbar-brand{
+  margin: 5px;
+  padding: 5px;
+}
+.app-navbar{
+  background-image: url("https://s.yimg.com/ap/build/images/sohp/2018-top-25/peaceamongchaos_small.jpg");
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+
+svg.icon {
+  display: inline-block;
+  height: 50px;
+  width: 57px;
+  fill: white;
+}
+
+.badge{
+  padding: 5px;
+  margin: 5px;
+}
