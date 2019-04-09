@@ -12,13 +12,17 @@ export class SearchService {
   constructor(private http: HttpClient) {}
 
   search(searchTerm: Observable<string>) {
-    return searchTerm.pipe(
-      debounceTime(50),
-      distinctUntilChanged(),
-      switchMap(
-        term => this.searchFlikr(term)
-      )
-    );
+    try {
+      return searchTerm.pipe(
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap(
+          term => this.searchFlikr(term)
+        )
+      );
+    } catch (error) {
+      console.log('> Error is handled: ', error.name);
+    }
   }
 
   searchUrl(term) {

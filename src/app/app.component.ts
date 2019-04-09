@@ -16,17 +16,23 @@ export class AppComponent {
   constructor(private searchService: SearchService) {
     this.searchService.search(this.searchTerm).subscribe(
       results => {
+        if (results) {
           this.searchResults = results;
+        }
+
       }
     );
   }
 
-  searchFlikr(event) {
-    const value = event.target.value;
-    if (value.trim().length > 0) {
+  searchFlickr(event) {
+    const value = event.target.value.trim();
+    if (value.length > 0) {
       this.searchTerm.next(value);
     } else {
-      this.searchResults.length = 0;
+      if (this.searchResults !== undefined) {
+        this.searchResults.length = 0;
+      }
+
     }
 
   }

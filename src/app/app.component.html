@@ -8,15 +8,12 @@
           <form class="form-group my-2 my-lg-0">
             <input class="form-control mr-sm-2" #searchInput name="searchInput" type="search"
                    placeholder="Search Flickr by tags or Author. "
-                   (keyup)="searchFlikr($event)">
+                   (keyup)="searchFlickr($event)">
           </form>
       </div>
     </div>
   </section>
  <section id="search-results">
-<!--   <div class="text-center">-->
-<!--     <p class="lead">{{searchResults}}</p>-->
-<!--   </div>-->
    <div class="row text-center d-flex justify-content-around"  >
      <div class="col-md-3 col-xs-6"
           *ngFor="let searchResult of searchResults ">
@@ -35,7 +32,7 @@
        </div>
 
      </div>
-     <div *ngIf="(searchResults)?.length === 0 && !!searchInput.value" >No Results Found</div>
+     <div class="card-body" *ngIf="searchResults != undefined && searchResults.length === 0 && searchInput.value.trim().length != 0" >Sorry ....no images found in pluckr. Try again.</div>
    </div>
  </section>
 <footer></footer>
