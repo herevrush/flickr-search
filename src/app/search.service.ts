@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 
@@ -42,14 +42,13 @@ export class SearchService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     console.log(errorMessage);
-    // return throwError(errorMessage);
+    return throwError(errorMessage);
   }
 
   searchFlikr(searchTerm: string) {
     return this.http.jsonp(this.searchUrl(searchTerm), 'jsoncallback').pipe(
       catchError( err => {
-        this.handleError(err);
-        return throwError(err) ;
+        return this.handleError(err);
       }),
       map(res  => {
         if ('items' in res) {
